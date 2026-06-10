@@ -1,0 +1,66 @@
+int seg[4 * 200005];
+
+void build(int idx, int low, int high, int arr[]) {
+    if (low == high) {
+        seg[idx] = arr[low];
+        return;
+    }
+
+    int mid = low + (high - low) / 2;
+
+    build(2 * idx + 1, low, mid, arr);
+    build(2 * idx + 2, mid + 1, high, arr);
+
+    seg[idx] = seg[2 * idx + 1] + seg[2 * idx + 2];
+}
+
+void update(int idx, int low, int high, int pos, int val) {
+    if (low == high) {
+        seg[idx] = val;
+        return;
+    }
+
+    int mid = low + (high - low) / 2;
+
+    if (pos <= mid)
+        update(2 * idx + 1, low, mid, pos, val);
+    else
+        update(2 * idx + 2, mid + 1, high, pos, val);
+
+    seg[idx] = seg[2 * idx + 1] + seg[2 * idx + 2];
+}
+
+int query(int idx, int low, int high, int l, int r) {
+    if (r < low || high < l)
+        return 0;
+
+    if (l <= low && high <= r)
+        return seg[idx];
+
+    int mid = low + (high - low) / 2;
+
+    int left = query(2 * idx + 1, low, mid, l, r);
+    int right = query(2 * idx + 2, mid + 1, high, l, r);
+
+    return left + right;
+}
+
+/*
+Usage:
+
+int n;
+int arr[n];
+
+memset(seg, 0, sizeof(seg));
+
+build(0, 0, n - 1, arr);
+
+update(0, 0, n - 1, pos, newValue);
+
+int sum = query(0, 0, n - 1, l, r);
+
+Notes:
+1. 0-based indexing.
+2. update() sets arr[pos] = newValue.
+3. query(l, r) returns sum in [l, r].
+*/

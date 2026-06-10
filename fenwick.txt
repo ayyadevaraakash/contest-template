@@ -1,0 +1,44 @@
+int fen[200005];
+
+int get(int i) {
+    i++;
+    int ans = 0;
+
+    while (i > 0) {
+        ans += fen[i];
+        i -= (i & -i);
+    }
+
+    return ans;
+}
+
+void update(int i, int val, int n) {
+    i++;
+
+    while (i <= n) {
+        fen[i] += val;
+        i += (i & -i);
+    }
+}
+
+int query(int l, int r) {
+    return get(r) - get(l - 1);
+}
+
+/*
+Usage:
+
+int n;
+memset(fen, 0, sizeof(fen));
+
+update(idx, val, n);   // add val at 0-based index idx
+
+int pref = get(i);     // sum of [0..i]
+
+int sum = query(l, r); // sum of [l..r]
+
+Notes:
+1. External indexing is 0-based.
+2. Pass actual array size as n.
+3. fen[] must be at least size n+1.
+*/

@@ -1,0 +1,36 @@
+struct DisjointSet {
+    vector<int> parent;
+    vector<int> rnk;
+
+    DisjointSet(int n) {
+        parent.resize(n);
+        rnk.resize(n);
+        for(int i=0; i<n; i++) {
+            parent[i]=i;
+            rnk[i]=0;
+        }
+    }
+
+    int get(int node) {
+        if (node==parent[node]) {
+            return node;
+        }
+        return parent[node]=get(parent[node]);
+    }
+
+    void unite(int u, int v) {
+        int U = get(u);
+        int V = get(v);
+        if(U == V) {
+            return;
+        }
+        if(rnk[U]>rnk[V]) {
+            parent[V]=U;
+        } else if(rnk[U]<rnk[V]) {
+            parent[U]=V;
+        } else {
+            parent[V]=U;
+            rnk[U]+=1;
+        }
+    }
+};
