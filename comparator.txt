@@ -1,4 +1,0 @@
-struct cmp {
-    bool operator()(const pp& o1, const pp& o2) const {
-    }
-};
