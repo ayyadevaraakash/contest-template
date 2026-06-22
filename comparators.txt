@@ -1,23 +1,14 @@
-struct cmp {
-    bool operator()(const pp& a, const pp& b) const {
-        if (a.first != b.first)
-            return a.first < b.first;
-        return a.second < b.second;
-    }
+auto cmp = [](const pp & a, const pp & b) {
+    if (a.first != b.first) return a.first < b.first;
+    return a.second < b.second;
 };
 
-set<pp, cmp> st;
+set<pp, decltype(cmp)> st(cmp);
 
-===
 
-struct cmp {
-    bool operator()(const pp& a, const pp& b) const {
-        if (a.first != b.first)
-            return a.first > b.first;
-        return a.second > b.second;
-    }
+auto cmp = [](const pp& a, const pp& b) {
+	if (a.first != b.first) return a.first > b.first;
+	return a.second > b.second;
 };
 
-priority_queue<pp,vector<pp>,cmp> pq;
-
-===
+priority_queue<pp,vector<pp>,decltype(cmp)> pq(cmp);
