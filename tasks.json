@@ -1,0 +1,47 @@
+========== FOR WINDOWS ==========
+
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile and run C++",
+            "type": "shell",
+            "command": "cmd.exe",
+            "args": [
+                "/c",
+                "g++ -std=c++17 -O2 -Wall ${relativeFile} -o ${fileBasenameNoExtension} && ${fileBasenameNoExtension}.exe < input.txt > output.txt"
+            ],
+            "presentation": {
+                "reveal": "silent"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
+
+========== FOR LINUX ==========
+
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile and run C++",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "g++ -std=c++17 -O2 -Wall \"${relativeFile}\" -o \"${fileBasenameNoExtension}\" && ./\"${fileBasenameNoExtension}\" < input.txt > output.txt"
+            ],
+            "presentation": {
+                "reveal": "silent"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
