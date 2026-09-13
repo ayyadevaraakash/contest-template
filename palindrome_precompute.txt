@@ -1,0 +1,28 @@
+constexpr int inf=1e9;
+vector<int> pal;
+
+int init=[]() {
+    for (int i=1;i<100000;i++) {
+        ll x=i;
+        ll t=i/10;
+        while(t){
+            x=x*10+t%10;
+            t/=10;
+        }
+        if (x<=inf){
+            pal.push_back(x);
+        }
+
+        x=i;
+        t=i;
+        while(t) {
+            x=x*10+t%10;
+            t/=10;
+        }
+        if (x<=inf) {
+            pal.push_back(x);
+        }
+    }
+    sort(pal.begin(), pal.end());
+    return 0;
+}();
