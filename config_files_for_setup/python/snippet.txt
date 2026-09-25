@@ -1,0 +1,20 @@
+{
+    "python-cp": {
+        "prefix": "#include",
+        "body": [
+            "import sys",
+            "input = sys.stdin.buffer.readline",
+            "",
+            "def solve():",
+            "    $0",
+            "",
+            "t = 1",
+            "# t = int(input())",
+            "",
+            "while t:",
+            "    solve()",
+            "    t -= 1"
+        ],
+        "description": "Python Competitive Programming"
+    }
+}

@@ -1,4 +1,4 @@
-========== FOR WINDOWS ==========
+// ========== FOR WINDOWS ==========
 
 {
     "version": "2.0.0",
@@ -6,10 +6,10 @@
         {
             "label": "Compile and run C++",
             "type": "shell",
-            "command": "cmd.exe",
+            "command": "bash",
             "args": [
-                "/c",
-                "g++ -std=c++17 -O2 -Wall ${relativeFile} -o ${fileBasenameNoExtension} && ${fileBasenameNoExtension}.exe < input.txt > output.txt"
+                "-c",
+                "g++ -std=c++20 -O2 -Wall \"${relativeFile}\" -o \"${fileBasenameNoExtension}\" && ./\"${fileBasenameNoExtension}\" < input.txt > output.txt"
             ],
             "presentation": {
                 "reveal": "silent"
@@ -22,7 +22,7 @@
     ]
 }
 
-========== FOR LINUX ==========
+// ========== FOR LINUX ==========
 
 {
     "version": "2.0.0",
