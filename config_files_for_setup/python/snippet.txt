@@ -3,7 +3,7 @@
         "prefix": "#include",
         "body": [
             "import sys",
-            "input = sys.stdin.buffer.readline",
+            "input = sys.stdin.readline",
             "",
             "def solve():",
             "    $0",
