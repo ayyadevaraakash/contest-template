@@ -1,0 +1,17 @@
+import heapq
+INF = 10**18
+
+def dijkstra(src, adj, dist):
+    pq = []
+    for i in range(len(dist)):
+        dist[i] = INF
+    dist[src] = 0
+    heapq.heappush(pq, (dist[src], src))
+    while pq:
+        cost, node = heapq.heappop(pq)
+        if dist[node] < cost:
+            continue
+        for ng, ngCost in adj[node]:
+            if cost + ngCost < dist[ng]:
+                dist[ng] = cost + ngCost
+                heapq.heappush(pq, (dist[ng], ng))

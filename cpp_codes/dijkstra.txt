@@ -1,0 +1,21 @@
+#define i2 array<long long,2>
+constexpr long long INF = 4e18;
+
+void dijkstra(int src, vector<i2> adj[], vector<long long>& dist) {
+	priority_queue<i2, vector<i2>, greater<i2>> pq;
+	fill(dist.begin(), dist.end(), INF);
+	dist[src]=0;
+	pq.push({dist[src], src});
+	while (!pq.empty()) {
+		auto [cost,node] = pq.top(); pq.pop();
+		if (dist[node]<cost) {
+			continue;
+		}
+		for (auto& [ng, ngCost] : adj[node]) {
+			if (cost + ngCost < dist[ng]) {
+				dist[ng] = cost + ngCost;
+				pq.push({dist[ng], ng});
+			}
+		}
+	}
+}

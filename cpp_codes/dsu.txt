@@ -34,3 +34,7 @@ struct DisjointSet {
         }
     }
 };
+
+# Usage
+DisjointSet ds(n);
+ds.unite(0, 1);

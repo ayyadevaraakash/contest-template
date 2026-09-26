@@ -1,0 +1,46 @@
+def build(idx, low, high, arr):
+    if low == high:
+        seg[idx] = arr[low]
+        return
+    mid = low + (high - low) // 2
+    build(2 * idx + 1, low, mid, arr)
+    build(2 * idx + 2, mid + 1, high, arr)
+    seg[idx] = seg[2 * idx + 1] + seg[2 * idx + 2]
+
+def update(idx, low, high, pos, val):
+    if low == high:
+        seg[idx] = val
+        return
+    mid = low + (high - low) // 2
+    if pos <= mid:
+        update(2 * idx + 1, low, mid, pos, val)
+    else:
+        update(2 * idx + 2, mid + 1, high, pos, val)
+    seg[idx] = seg[2 * idx + 1] + seg[2 * idx + 2]
+
+def query(idx, low, high, l, r):
+    if r < low or high < l:
+        return 0
+    if l <= low and high <= r:
+        return seg[idx]
+    mid = low + (high - low) // 2
+    left = query(2 * idx + 1, low, mid, l, r)
+    right = query(2 * idx + 2, mid + 1, high, l, r)
+    return left + right
+
+# Usage:
+#
+# n = ...
+# arr = [...]
+# seg = [0] * (4 * (n+1))
+#
+# build(0, 0, n - 1, arr)
+#
+# update(0, 0, n - 1, pos, newValue)
+#
+# sum = query(0, 0, n - 1, l, r)
+#
+# Notes:
+# 1. 0-based indexing.
+# 2. update() sets arr[pos] = newValue in the segment tree.
+# 3. query(l, r) returns sum in [l, r].

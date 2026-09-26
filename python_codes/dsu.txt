@@ -1,0 +1,33 @@
+class DisjointSet:
+    def __init__(self, n):
+        self.parent = [0] * n
+        self.rnk = [0] * n
+
+        for i in range(n):
+            self.parent[i] = i
+            self.rnk[i] = 0
+
+    def get(self, node):
+        if node == self.parent[node]:
+            return node
+        self.parent[node] = self.get(self.parent[node])
+        return self.parent[node]
+
+    def unite(self, u, v):
+        U = self.get(u)
+        V = self.get(v)
+
+        if U == V:
+            return
+
+        if self.rnk[U] > self.rnk[V]:
+            self.parent[V] = U
+        elif self.rnk[U] < self.rnk[V]:
+            self.parent[U] = V
+        else:
+            self.parent[V] = U
+            self.rnk[U] += 1
+
+# Usage
+ds = DisjointSet(n)
+ds.unite(u, v)

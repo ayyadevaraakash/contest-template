@@ -1,0 +1,34 @@
+class DisjointSet:
+    def __init__(self, n):
+        self.parent = [0] * n
+        self.size = [0] * n
+
+        for i in range(n):
+            self.parent[i] = i
+            self.size[i] = 1
+
+    def get(self, node):
+        if node == self.parent[node]:
+            return node
+        self.parent[node] = self.get(self.parent[node])
+        return self.parent[node]
+
+    def ubs(self, u, v):
+        U = self.get(u)
+        V = self.get(v)
+
+        if U == V:
+            return
+
+        if self.size[U] >= self.size[V]:
+            self.parent[V] = U
+            self.size[U] += self.size[V]
+        else:
+            self.parent[U] = V
+            self.size[V] += self.size[U]
+
+
+# Usage
+ds = DisjointSet(5)
+ds.ubs(0, 1)
+ds.ubs(1, 2)
